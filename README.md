@@ -1,16 +1,64 @@
-# React + Vite
+# CrossQuest V2
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to **CrossQuest V2**, a modern, interactive web-based gaming arcade! This platform brings together classic board games with a sleek, animated UI built on React and Vite.
 
-Currently, two official plugins are available:
+## 🎮 Included Games
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Chess**: Play a full game of chess with built-in logic and move validation.
+- **Ludo**: Enjoy the classic multiplayer board game experience.
+- **Snake & Ladder**: Test your luck with this timeless dice-rolling game.
+- **Tic-Tac-Toe**: Quick, simple, and always fun.
 
-## React Compiler
+## ✨ Key Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **Modern UI/UX**: Designed with Tailwind CSS and Framer Motion for smooth, interactive animations.
+- **Particle Effects**: Stunning background visual effects powered by `tsparticles`.
+- **User System**: Includes a custom Authentication flow, User Profiles, and Saved Games management.
+- **Leaderboards**: Compete with others and climb the ranks on the global leaderboard.
+- **Responsive Layout**: Play on any device seamlessly.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **Framework**: [React](https://react.dev/) 19 & [Vite](https://vitejs.dev/)
+- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/)
+- **Routing**: React Router DOM
+- **Game Logic**: `chess.js` (for Chess rules)
+
+## 🚀 Getting Started
+
+### Prerequisites
+Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Ankitraj-17/CrossQuest-V2.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd CrossQuest-V2
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Start the development server:
+   ```bash
+   npm run dev
+   ```
+
+## 📜 Scripts
+
+- `npm run dev`: Starts the Vite development server.
+- `npm run build`: Bundles the app for production.
+- `npm run lint`: Runs ESLint to check for code quality.
+- `npm run preview`: Previews the production build locally.
+
+## 🤝 Contributing
+
+Contributions are always welcome! Feel free to open an issue or submit a pull request if you have ideas for new features or bug fixes.
+
+---
+*Created by [Ankitraj-17](https://github.com/Ankitraj-17)*
