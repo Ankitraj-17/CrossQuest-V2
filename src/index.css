@@ -1,0 +1,172 @@
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;700&family=Patrick+Hand&family=Orbitron:wght@400;600;700;900&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.notebook-paper {
+  background-color: #fdfdfd;
+  background-image: 
+    linear-gradient(90deg, transparent 79px, #ff708e 79px, #ff708e 81px, transparent 81px),
+    linear-gradient(#e0f2ff .1em, transparent .1em);
+  background-size: 100% 2.5rem;
+}
+
+/* =====================================================
+   RESET & BASE (NEO-BRUTALISM LIGHT)
+===================================================== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background-color: #fdfdfd;
+  color: #000000;
+  background-image: radial-gradient(#000 1px, transparent 0);
+  background-size: 30px 30px;
+  overflow-x: hidden;
+  cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="black" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="14.5 17.5 3 6 3 3 6 3 17.5 14.5"/><line x1="13" x2="19" y1="19" y2="13"/><line x1="16" x2="20" y1="16" y2="20"/><line x1="19" x2="21" y1="21" y2="19"/></svg>') 3 3, auto;
+  min-height: 100vh;
+}
+
+h1, h2, h3, h4, h5, h6 { font-family: 'Orbitron', sans-serif; color: #000; }
+input, button { font-family: 'Outfit', sans-serif; cursor: inherit; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #fdfdfd; }
+::-webkit-scrollbar-thumb { background: #000; border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #333; }
+
+/* Custom cursor removed to ensure zero-delay CSS cursor works. */
+
+/* =====================================================
+   NEO-BRUTALISM DESIGN SYSTEM
+===================================================== */
+
+.g-card {
+  background: #ffffff;
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0 #000;
+  border-radius: 12px;
+}
+
+.ng-card-cyan, .ng-card-pink, .ng-card-purple, .ng-card-blue, .ng-card-green {
+  border: 3px solid #000;
+  box-shadow: 6px 6px 0 #000;
+  border-radius: 12px;
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.ng-card-cyan:hover, .ng-card-pink:hover, .ng-card-purple:hover, .ng-card-blue:hover, .ng-card-green:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0 #000;
+}
+
+.ng-card-cyan { background-color: #b3ffff; }
+.ng-card-pink { background-color: #ffb3e6; }
+.ng-card-purple { background-color: #e6b3ff; }
+.ng-card-blue { background-color: #b3d1ff; }
+.ng-card-green { background-color: #b3ffcc; }
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+.nbtn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  padding: 11px 24px; border-radius: 8px;
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800; font-size: 0.82rem;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  cursor: inherit; outline: none;
+  border: 3px solid #000;
+  box-shadow: 4px 4px 0 #000;
+  color: #000;
+  transition: transform 0.12s, box-shadow 0.12s;
+}
+.nbtn:hover {
+  transform: translate(-2px, -2px);
+  box-shadow: 6px 6px 0 #000;
+}
+.nbtn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 #000;
+}
+
+.nbtn-cyan { background-color: #00f3ff; }
+.nbtn-pink { background-color: #ff3399; }
+.nbtn-purple { background-color: #cc66ff; }
+.nbtn-blue { background-color: #3388ff; }
+.nbtn-green { background-color: #00ff88; }
+.nbtn-ghost { background-color: #ffffff; }
+
+/* =====================================================
+   INPUTS
+===================================================== */
+.ninput {
+  width: 100%; outline: none;
+  background: #ffffff;
+  border: 3px solid #000;
+  border-radius: 8px;
+  padding: 12px 18px;
+  color: #000; font-size: 1rem;
+  box-shadow: 4px 4px 0 #000;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.ninput::placeholder { color: #888; }
+.ninput:focus {
+  background: #ffffcc;
+  box-shadow: 6px 6px 0 #000;
+}
+
+/* =====================================================
+   TEXT COLORS
+===================================================== */
+.t-cyan, .t-pink, .t-purple, .t-blue, .t-green, .t-yellow {
+  color: #000; font-weight: 900;
+}
+.t-muted { color: #333; font-weight: 600; }
+
+/* =====================================================
+   PAGE LAYOUT
+===================================================== */
+.page { position: relative; z-index: 10; min-height: 100vh; padding: 5.5rem 1rem 5rem; }
+.inner { max-width: 900px; margin: 0 auto; }
+.inner-lg { max-width: 1200px; margin: 0 auto; }
+
+.back-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  color: #000; font-size: 0.85rem; text-decoration: none; font-weight: 700;
+  transition: transform 0.2s; margin-bottom: 2rem;
+}
+.back-link:hover { transform: translateX(-4px); }
+
+.score-row { display: flex; gap: 12px; margin-bottom: 24px; }
+.score-box {
+  flex: 1; text-align: center; padding: 16px 8px;
+  background: #fff;
+  border: 3px solid #000;
+  box-shadow: 5px 5px 0 #000;
+  border-radius: 8px;
+}
+
+/* =====================================================
+   3D TRANSFORM UTILITIES
+===================================================== */
+.perspective-1000 { perspective: 1000px; }
+.preserve-3d { transform-style: preserve-3d; }
+.backface-hidden { backface-visibility: hidden; }
+
+.translate-z-10 { transform: translateZ(40px); }
+.translate-z--10 { transform: translateZ(-40px); }
+.rotate-y-90 { transform: rotateY(90deg) translateZ(40px); }
+.rotate-y--90 { transform: rotateY(-90deg) translateZ(40px); }
+.rotate-x-90 { transform: rotateX(90deg) translateZ(40px); }
+.rotate-x--90 { transform: rotateX(-90deg) translateZ(40px); }
+
+@media (min-width: 768px) {
+  .translate-z-10 { transform: translateZ(56px); }
+  .translate-z--10 { transform: translateZ(-56px); }
+  .rotate-y-90 { transform: rotateY(90deg) translateZ(56px); }
+  .rotate-y--90 { transform: rotateY(-90deg) translateZ(56px); }
+  .rotate-x-90 { transform: rotateX(90deg) translateZ(56px); }
+  .rotate-x--90 { transform: rotateX(-90deg) translateZ(56px); }
+}
