@@ -61,4 +61,4 @@ Make sure you have [Node.js](https://nodejs.org/) installed on your machine.
 Contributions are always welcome! Feel free to open an issue or submit a pull request if you have ideas for new features or bug fixes.
 
 ---
-*Created by [Ankitraj-17](https://github.com/Ankitraj-17)*
+*Created by [Ankitraj]
