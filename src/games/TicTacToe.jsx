@@ -6,6 +6,7 @@ import { useAuth } from '../context/AuthContext';
 import GameHeader from '../components/GameHeader';
 import { playClick, playScore, playWin } from '../utils/sounds';
 import ExitGameDialog from '../components/ExitGameDialog';
+import { recordResult } from '../utils/leaderboard';
 
 const WIN_LINES = [ [0,1,2],[3,4,5],[6,7,8], [0,3,6],[1,4,7],[2,5,8], [0,4,8],[2,4,6] ];
 
@@ -84,9 +85,11 @@ export default function TicTacToe() {
       playWin();
       if (r.winner === 'X') {
         setScoreA(s => s + 1);
+        recordResult('tictactoe', playerA, 'win');
         if (user) recordMatch('Tic Tac Toe', 'Win', 100);
       } else {
         setScoreB(s => s + 1);
+        recordResult('tictactoe', playerB, 'win');
         if (user) recordMatch('Tic Tac Toe', 'Loss', 20);
       }
     } else if (next.every(Boolean)) {

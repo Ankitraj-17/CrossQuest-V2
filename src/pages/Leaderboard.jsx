@@ -8,8 +8,10 @@ const GAME_LABELS = {
   snakeladder: 'Snake & Ladder',
   ludo:        'Classic Ludo',
   tictactoe:   'Tic Tac Toe',
-  rps:         'Rock Paper Scissors',
+  chess:       'Chess Arena',
 };
+
+const GAMES_LIST = ['snakeladder', 'ludo', 'tictactoe', 'chess'];
 
 const MEDAL = ['🥇', '🥈', '🥉'];
 
@@ -49,7 +51,10 @@ export default function Leaderboard() {
     }));
   }, []);
 
-  const refresh = () => setLb(getLeaderboard());
+  const refresh = () => {
+    const newLb = getLeaderboard();
+    setLb(prev => JSON.stringify(prev) === JSON.stringify(newLb) ? prev : newLb);
+  };
   const reset   = () => { if(confirm("Clear all scores?")) { clearLeaderboard(); refresh(); } };
 
   const getResumePath = (gameId) => {
@@ -57,6 +62,7 @@ export default function Leaderboard() {
       case 'snakeladder': return '/snake-ladder?resume=true';
       case 'ludo':        return '/ludo?resume=true';
       case 'tictactoe':   return '/tictactoe?resume=true';
+      case 'chess':       return '/chess?resume=true';
       default:            return '#';
     }
   };
@@ -120,20 +126,34 @@ export default function Leaderboard() {
           </motion.div>
           <h1 className="text-3xl md:text-7xl font-black uppercase italic tracking-tighter text-black mt-1 md:mt-2 text-center leading-none">Hall of Fame</h1>
         </div>
-        <button onClick={refresh} className="bg-white px-4 md:px-5 py-2 md:py-2.5 rounded-2xl border-4 border-black shadow-[4px_4px_0_#000] md:shadow-[6px_6px_0_#000] font-black uppercase text-[10px] md:text-xs hover:bg-cyan-50 transition-colors">
-          <RotateCcw size={16} />
-        </button>
+        <div className="flex gap-2">
+          <button onClick={reset} title="Clear Leaderboard" className="bg-white px-4 md:px-5 py-2 md:py-2.5 rounded-2xl border-4 border-black shadow-[4px_4px_0_#000] md:shadow-[6px_6px_0_#000] font-black uppercase text-[10px] md:text-xs hover:bg-red-50 text-red-500 transition-colors">
+            Reset
+          </button>
+          <button onClick={refresh} className="bg-white px-4 md:px-5 py-2 md:py-2.5 rounded-2xl border-4 border-black shadow-[4px_4px_0_#000] md:shadow-[6px_6px_0_#000] font-black uppercase text-[10px] md:text-xs hover:bg-cyan-50 transition-colors">
+            <RotateCcw size={16} />
+          </button>
+        </div>
       </header>
 
       {/* --- CONTENT --- */}
       <section className="relative z-10 w-full max-w-5xl space-y-12 pb-20">
-        {Object.keys(lb).length === 0 ? (
+        {GAMES_LIST.filter(game => {
+          const hasScore = lb[game] && Object.keys(lb[game]).length > 0;
+          const hasLive = !!localStorage.getItem(`active_game_${game}`);
+          return hasScore || hasLive;
+        }).length === 0 ? (
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="bg-white/80 backdrop-blur-md p-20 rounded-[3rem] border-[6px] border-black shadow-[20px_20px_0_#000] text-center">
              <div className="text-3xl font-black uppercase opacity-20 italic">No legends found yet.</div>
              <div className="mt-4 text-black font-bold uppercase tracking-widest text-sm">Play a game to claim your spot!</div>
           </motion.div>
         ) : (
-          Object.entries(lb).map(([game, players], gi) => {
+          GAMES_LIST.map((game, gi) => {
+            const hasScore = lb[game] && Object.keys(lb[game]).length > 0;
+            const hasLive = !!localStorage.getItem(`active_game_${game}`);
+            if (!hasScore && !hasLive) return null;
+
+            const players = lb[game] || {};
             const sorted = Object.entries(players).sort(([, a], [, b]) => b.wins - a.wins);
             return (
               <motion.div

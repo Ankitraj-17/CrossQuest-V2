@@ -8,6 +8,7 @@ import {
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { playClick } from '../utils/sounds';
+import { recordResult } from '../utils/leaderboard';
 
 /* ─── Constants ─────────────────────────────────────────── */
 const FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
@@ -330,12 +331,12 @@ export default function ChessGame() {
     tick.current = setInterval(() => {
       if (turn === 'w') {
         setTW(prev => {
-          if (prev <= 1) { endGame(`Time out — ${nameB} wins!`, 'loss'); return 0; }
+          if (prev <= 1) { endGame(`Time out — ${nameB} wins!`, 'loss', nameB); return 0; }
           return prev - 1;
         });
       } else {
         setTB(prev => {
-          if (prev <= 1) { endGame(`Time out — ${nameW} wins!`, 'win'); return 0; }
+          if (prev <= 1) { endGame(`Time out — ${nameW} wins!`, 'win', nameW); return 0; }
           return prev - 1;
         });
       }
@@ -346,10 +347,13 @@ export default function ChessGame() {
   }, [screen, over, turn, mode.id]);
 
   /* ── Helpers ───────────────────────────────────────────── */
-  function endGame(msg, outcome) {
+  function endGame(msg, outcome, winnerName = null) {
     clearInterval(tick.current);
     setOver(true);
     setResult(msg);
+    if (winnerName) {
+      recordResult('chess', winnerName, 'win');
+    }
     recordMatch('Chess', outcome, outcome === 'win' ? 500 : outcome === 'draw' ? 100 : 300);
   }
 
@@ -377,7 +381,7 @@ export default function ChessGame() {
     // Check end conditions
     if (chessInstance.isCheckmate()) {
       const winner = chessInstance.turn() === 'w' ? nameB : nameW;
-      setTimeout(() => endGame(`Checkmate — ${winner} wins!`, chessInstance.turn() === 'w' ? 'loss' : 'win'), 50);
+      setTimeout(() => endGame(`Checkmate — ${winner} wins!`, chessInstance.turn() === 'w' ? 'loss' : 'win', winner), 50);
     } else if (chessInstance.isDraw() || chessInstance.isStalemate() || chessInstance.isThreefoldRepetition()) {
       setTimeout(() => endGame("It's a draw!", 'draw'), 50);
     }
@@ -490,7 +494,7 @@ export default function ChessGame() {
             <span className="px-2.5 py-1 rounded-md bg-amber-900/30 border border-amber-700/30 text-amber-400 text-[10px] font-black uppercase tracking-widest">{mode.label}</span>
             {/* Mobile resign */}
             <button
-              onClick={() => endGame(`${turn === 'w' ? nameB : nameW} wins by resignation`, turn === 'w' ? 'loss' : 'win')}
+              onClick={() => endGame(`${turn === 'w' ? nameB : nameW} wins by resignation`, turn === 'w' ? 'loss' : 'win', turn === 'w' ? nameB : nameW)}
               disabled={over}
               className="md:hidden flex items-center gap-1.5 rounded-lg bg-red-900/20 hover:bg-red-900/40 border border-red-800/30 px-3 py-1.5 text-[10px] font-black uppercase tracking-widest text-red-400 transition-all disabled:opacity-30"
             >
@@ -654,7 +658,7 @@ export default function ChessGame() {
             <RotateCcw size={12} /> New Game
           </button>
           <button
-            onClick={() => endGame(`${turn === 'w' ? nameB : nameW} wins by resignation`, turn === 'w' ? 'loss' : 'win')}
+            onClick={() => endGame(`${turn === 'w' ? nameB : nameW} wins by resignation`, turn === 'w' ? 'loss' : 'win', turn === 'w' ? nameB : nameW)}
             disabled={over}
             className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-red-950/30 hover:bg-red-900/40 border border-red-800/20 text-red-400 text-[11px] font-black uppercase tracking-wide transition-all disabled:opacity-20 disabled:pointer-events-none"
           >
