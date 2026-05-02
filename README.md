@@ -2,7 +2,7 @@
 
 Welcome to **CrossQuest V2**, a modern, interactive web-based gaming arcade! This platform brings together classic board games with a sleek, animated UI built on React and Vite.
 
-*Deploy* *Link* :https://crossquest-v2.vercel.app/
+*Deploy* *Link* : https://cross-quest-v2.vercel.app/
 
 ## 🎮 Included Games
 
